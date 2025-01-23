@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Weather App</h5>
+        <form (ngSubmit)="getWeather(city)">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter city"
+              [(ngModel)]="city"
+              name="city"
+              required
+            />
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+        <div *ngIf="weather" class="weather-info">
+          <h3>{{ weather.name }}</h3>
+          <p><img [src]="weatherIcon" alt="Weather icon" /></p>
+          <p>Temperature: {{ weather.main.temp }}°C</p>
+          <p>Feels Like: {{ weather.main.feels_like }}°C</p>
+          <p>Pressure: {{ weather.main.pressure }} hPa</p>
+          <p>Humidity: {{ weather.main.humidity }}%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
