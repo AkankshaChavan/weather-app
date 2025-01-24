@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class WeatherCardComponent {
 
-  city: string = '';
+  city: string = ''; 
   weather: any;
   weatherIcon: string = '';
 
@@ -31,10 +31,13 @@ export class WeatherCardComponent {
       },
       error: (err) => {
         alert('City not found!');
-        // this.weather = null;
-        // this.weatherIcon = '';
+        this.weather = null;
+        this.weatherIcon = '';
       }
     });
   }
 
+  ngOnInit(): void {
+    this.getWeather('Mumbai');
+  }
 }
