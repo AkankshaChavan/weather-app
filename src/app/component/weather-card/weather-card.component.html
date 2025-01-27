@@ -1,29 +1,41 @@
 <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Weather App</h5>
-        <form (ngSubmit)="getWeather(city)">
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter city"
-              [(ngModel)]="city"
-              name="city"
-              required
-            />
-            <button class="btn btn-primary" type="submit">Search</button>
-          </div>
-        </form>
-        <div *ngIf="weather" class="weather-info">
-          <h3>{{ weather.name }}</h3>
-          <p><img [src]="weatherIcon" alt="Weather icon" /></p>
-          <p>Temperature: {{ weather.main.temp }}°C</p>
-          <p>Feels Like: {{ weather.main.feels_like }}°C</p>
-          <p>Pressure: {{ weather.main.pressure }} hPa</p>
-          <p>Humidity: {{ weather.main.humidity }}%</p>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Weather App</h5>
+      <form (ngSubmit)="getWeather(city)">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter city"
+            [(ngModel)]="city"
+            name="city"
+            required
+          />
+          <button class="btn btn-primary" type="submit" [disabled]="loading && !message">
+            {{ loading ? "Loading..." : "Search" }}
+          </button>
         </div>
+      </form>
+      <div *ngIf="message" class="alert alert-info">
+        <p>{{ message }}</p>
+      </div>
+      <div *ngIf="weather" class="weather-info">
+        <h3>{{ weather.name }}</h3>
+        <div class="weather-gif">
+          <img [src]="weatherGif" alt="Weather condition" />
+        </div>
+        <div class="row">
+          <div class="col-6 col-sm-12 col-lg-6"><p>Temperature: {{ weather.main.temp }}°C</p></div>
+          <div class="col-6 col-sm-12 col-lg-6"><p>Feels Like: {{ weather.main.feels_like }}°C</p></div>
+          <div class="col-6 col-sm-12 col-lg-6"><p>Pressure: {{ weather.main.pressure }} hPa</p></div>
+          <div class="col-6 col-sm-12 col-lg-6"><p>Humidity: {{ weather.main.humidity }}%</p></div>
+          <!-- <div class="col-6 col-sm-12 col-lg-6"><p>Wind Speed: {{ weather.wind.speed }} m/s</p></div> -->
+        </div>
+        
+        
+        
       </div>
     </div>
   </div>
-  
+</div>
