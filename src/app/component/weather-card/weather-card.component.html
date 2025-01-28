@@ -40,8 +40,8 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="temperature-info">
               <h3 class="city-name">{{ weather.name }}</h3>
-              <h1 class="temperature"><i class="icon wi wi-thermometer"></i> {{ weather.main.temp }}°C</h1>
-              <p class="feels-like">Feels Like: <b>{{ weather.main.feels_like }}</b>°C</p>
+              <h1 class="temperature"><i class="icon wi wi-thermometer"></i> {{ weather.main.temp }}<sup>°C</sup></h1>
+              <p class="feels-like"><b>{{ weatherType }}</b> | Feels Like: <b>{{ weather.main.feels_like }}</b><sup>°C</sup></p>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12">

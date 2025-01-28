@@ -19,6 +19,7 @@ export class WeatherCardComponent implements OnInit {
   message: string = 'Please enter a city name';
   loading: boolean = false;
   dayNightGif: string = '';
+  weatherType: string = ''
 
   constructor(private apiService: ApiService) { }
 
@@ -36,6 +37,8 @@ export class WeatherCardComponent implements OnInit {
       next: (data) => {
         console.log(data);
         this.weather = data;
+        this.weatherType = data.weather[0].main;
+        console.log(this.weatherType);
         const isDay = this.isDayTime(data.dt, data.sys.sunrise, data.sys.sunset);
         this.weatherGif = this.getWeatherGif(data.weather[0].main, isDay);
         this.message = '';
@@ -65,12 +68,12 @@ export class WeatherCardComponent implements OnInit {
         night: '../../../assets/moon.gif',
       },
       Clouds: {
-        day: '../../../assets/cloudy-day.gif',
-        night: '../../../assets/cloudy-night.gif',
+        day: '../../../assets/cloudy.gif',
+        night: '../../../assets/cloudy.gif',
       },
       Rain: {
-        day: '../../../assets/rainy-day.gif',
-        night: '../../../assets/rainy-night.gif',
+        day: '../../../assets/rainy.gif',
+        night: '../../../assets/rainy.gif',
       },
       Thunderstorm: {
         day: '../../../assets/thunderstorm-day.gif',
@@ -93,8 +96,8 @@ export class WeatherCardComponent implements OnInit {
         night: '../../../assets/haze-night.gif',
       },
       Smoke: {
-        day: '../../../assets/haze-day.gif',
-        night: '../../../assets/haze-night.gif',
+        day: '../../../assets/smoke-day.gif',
+        night: '../../../assets/smoke-night.gif',
       },
     };
     return gifs[condition]?.[isDay ? 'day' : 'night'] || '../../../assets/default.gif';
