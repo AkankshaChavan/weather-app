@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class WeatherCardComponent implements OnInit {
   city: string = '';
   weather: any = null;
-  weatherGif: string = '../../../assets/clear-day.png';
+  weatherGif: string = '../../../assets/default.gif';
   message: string = 'Please enter a city name';
   loading: boolean = false;
   dayNightGif: string = '';
@@ -27,7 +27,7 @@ export class WeatherCardComponent implements OnInit {
     if (!city.trim()) {
       this.message = 'Please enter a city name';
       this.weather = null;
-      this.weatherGif = '../../../assets/clear-day.png';
+      this.weatherGif = '../../../assets/default.gif';
       return;
     }
   
