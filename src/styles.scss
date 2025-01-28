@@ -1,15 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
-$primary-color: #4a90e2;
-$secondary-color: #f5f7fa;
-$text-color: #333;
-$background-color: #ffffff;
-$border-color: #e0e0e0;
+  /* You can add global styles to this file, and also import other style files */
+  $primary-color: #ffffff;
+  $blue-color: 4a90e2;
+  $secondary-color: #f5f7fa;
+  $text-color: #333;
+  $background-color: #ffffff;
+  $border-color: #e0e0e0;
 
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: $secondary-color;
-  color: $text-color;
-  margin: 0;
-  padding: 0;
-}
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: $secondary-color;
+    color: $text-color;
+    margin: 0;
+    padding: 0;
+  }
 

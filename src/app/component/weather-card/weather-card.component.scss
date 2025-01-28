@@ -1,76 +1,215 @@
 @import '../../../styles.scss';
 
 .container {
-  max-width: 600px;
-  margin: 50px auto;
+  width: 900px;
+  height: 90vh;
+  margin: 20px auto;
   padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card {
-  background-color: $background-color;
-  border: 1px solid $border-color;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border: none;
+  border-radius: 15px;
 }
 
 .card-body {
   padding: 20px;
 
   .card-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
-    color: $primary-color;
+    color: $blue-color;
     text-align: center;
     margin-bottom: 20px;
   }
 }
-.default-message {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 1.2rem;
-  color: #6c757d;
-  font-weight: 500;
-}
+
 .input-group {
   margin-bottom: 20px;
 
   .form-control {
-    border-radius: 5px;
-    border: 1px solid $border-color;
-    padding: 10px;
+    border-radius: 0;
+    color: #fff;
+    border: transparent;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px;
     font-size: 1rem;
+    box-shadow: 0 2px 4px transparent;
+    background: transparent;
+
+    &::placeholder{
+      color: $primary-color;
+    }
   }
 
   .btn-primary {
-    background-color: $primary-color;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 20px;
+    border-radius: 0;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: $blue-color, 10%;
     }
   }
 }
 
 .weather-info {
-  text-align: center;
+  padding-top: 50px;
+  // text-align: center;
 
-  h3 {
-    font-size: 1.8rem;
+  .d-flex{
+    align-items: center;
+  }
+
+  .city-name {
+    font-size: 2.5rem;
+    font-weight: bold;
     color: $primary-color;
+    text-transform: capitalize;
     margin-bottom: 10px;
   }
 
-  img {
-    margin-bottom: 15px;
+  .temperature-info {
+    .temperature {
+      font-size: 4.5rem;
+      font-weight: bold;
+      color: $primary-color;
+      margin-bottom: 5px;
+    }
+    .feels-like {
+      // font-size: 1.2rem;
+      color: $primary-color;
+    }
+    
   }
 
-  p {
-    font-size: 1rem;
-    margin: 5px 0;
+  .weather-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+
+    .detail-box {
+      background-color: #dee2e635;
+      color: $primary-color;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+
+      i {
+        font-size: 2rem;
+        color: $blue-color;
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      p:first-child {
+        font-weight: bold;
+        color: $text-color;
+      }
+    }
+  }
+}
+.highlight{
+  font-size: 2rem;
+  display: block;
+  line-height: 28px;
+  margin-top: 5px;
+}
+.gif-box{
+  img{
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.alert{
+  p{
+    text-align: center;
+    font-size: 22px;
+    color: $primary-color;
+  }
+  img{
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 1024.5px) {
+  .container{
+    height: 100%;
+  }
+}
+
+@media (max-width: 768.5px) {
+  .container{
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 0;
+    .weather-details {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  .weather-info{
+    .d-flex{
+      flex-direction: column-reverse;
+    }
+  }
+  .temperature-info{
+    text-align: center;
+    .temperature{
+      font-size: 4.5rem!important;
+    }
+  }
+  .gif-box{
+    img{
+      width: 200px;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+@media (max-width: 425.5px) {
+  .container{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+  .weather-info{
+    .d-flex{
+      flex-direction: column-reverse;
+    }
+  }
+  .temperature-info{
+    text-align: center;
+    .temperature{
+      font-size: 3.5rem!important;
+    }
+  }
+  .gif-box{
+    img{
+      width: 200px;
+      display: block;
+      margin: 0 auto;
+    }
   }
 }

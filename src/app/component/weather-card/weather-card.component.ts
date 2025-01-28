@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./weather-card.component.scss'],
   providers: [ApiService],
 })
-export class WeatherCardComponent {
+export class WeatherCardComponent implements OnInit {
   city: string = '';
   weather: any = null;
-  weatherGif: string = '../../../assets/default.gif';
+  weatherGif: string = '../../../assets/clear-day.png';
   message: string = 'Please enter a city name';
   loading: boolean = false;
+  dayNightGif: string = '';
 
   constructor(private apiService: ApiService) { }
 
@@ -25,42 +26,80 @@ export class WeatherCardComponent {
     if (!city.trim()) {
       this.message = 'Please enter a city name';
       this.weather = null;
-      this.weatherGif = '../../../assets/default.gif';
+      this.weatherGif = '../../../assets/clear-day.png';
       return;
     }
-
+  
     this.loading = true;
     this.message = '';
     this.apiService.getWeather(city).subscribe({
       next: (data) => {
+        console.log(data);
         this.weather = data;
-        this.weatherGif = this.getWeatherGif(data.weather[0].main);
+        const isDay = this.isDayTime(data.dt, data.sys.sunrise, data.sys.sunset);
+        this.weatherGif = this.getWeatherGif(data.weather[0].main, isDay);
         this.message = '';
+        this.dayNightGif = isDay ? 'https://img.freepik.com/premium-photo/gradient-color-background-colorful-vibrant-colors-multicolored-bright-colors-radiant-spectrum_955379-14548.jpg?w=360' : 'https://img.freepik.com/free-photo/gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio_1258-67827.jpg?t=st=1738056391~exp=1738059991~hmac=631144927b213996011b0bc5182f6a51d3be393e30debd676b574fbe1fb938c8&w=740';
       },
       error: () => {
         this.message = 'City not found! Please try again.';
         this.weather = null;
         this.weatherGif = '../../../assets/default.gif';
-        this.loading = false; 
+        this.loading = false;
       },
       complete: () => {
-        this.loading = false; 
+        this.loading = false;
       },
     });
   }
+  
 
-  getWeatherGif(condition: string): string {
-    const gifs: { [key: string]: string } = {
-      Clear: '../../../assets/sunny.gif',
-      Clouds: '../../../assets/cloudy.gif',
-      Rain: '../../../assets/rainy.gif',
-      Thunderstorm: '../../../assets/thunderstorm.gif',
-      Snow: '../../../assets/snow.gif',
-      Smoke: '../../../assets/smoke.gif',
-      Drizzle: '../../../assets/drizzle.gif',
-      Mist: '../../../assets/mist.gif',
-      Haze: '../../../assets/haze.gif',
+  isDayTime(currentTime: number, sunrise: number, sunset: number): boolean {
+    return currentTime >= sunrise && currentTime <= sunset;
+  }
+  
+  getWeatherGif(condition: string, isDay: boolean): string {
+    const gifs: { [key: string]: { day: string; night: string } } = {
+      Clear: {
+        day: '../../../assets/sunny.gif',
+        night: '../../../assets/moon.gif',
+      },
+      Clouds: {
+        day: '../../../assets/cloudy-day.gif',
+        night: '../../../assets/cloudy-night.gif',
+      },
+      Rain: {
+        day: '../../../assets/rainy-day.gif',
+        night: '../../../assets/rainy-night.gif',
+      },
+      Thunderstorm: {
+        day: '../../../assets/thunderstorm-day.gif',
+        night: '../../../assets/thunderstorm-night.gif',
+      },
+      Snow: {
+        day: '../../../assets/snow-day.gif',
+        night: '../../../assets/snow-night.gif',
+      },
+      Drizzle: {
+        day: '../../../assets/drizzle-day.gif',
+        night: '../../../assets/drizzle-night.gif',
+      },
+      Mist: {
+        day: '../../../assets/mist-day.gif',
+        night: '../../../assets/mist-night.gif',
+      },
+      Haze: {
+        day: '../../../assets/haze-day.gif',
+        night: '../../../assets/haze-night.gif',
+      },
+      Smoke: {
+        day: '../../../assets/haze-day.gif',
+        night: '../../../assets/haze-night.gif',
+      },
     };
-    return gifs[condition] || '../../../assets/default.gif';
+    return gifs[condition]?.[isDay ? 'day' : 'night'] || '../../../assets/default.gif';
+  }
+  ngOnInit(): void {
+    this.getWeather('Mumbai'); 
   }
 }
