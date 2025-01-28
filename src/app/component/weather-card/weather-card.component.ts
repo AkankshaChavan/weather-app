@@ -42,7 +42,7 @@ export class WeatherCardComponent implements OnInit {
         const isDay = this.isDayTime(data.dt, data.sys.sunrise, data.sys.sunset);
         this.weatherGif = this.getWeatherGif(data.weather[0].main, isDay);
         this.message = '';
-        this.dayNightGif = isDay ? 'https://img.freepik.com/premium-photo/gradient-color-background-colorful-vibrant-colors-multicolored-bright-colors-radiant-spectrum_955379-14548.jpg?w=360' : 'https://img.freepik.com/free-photo/gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio_1258-67827.jpg?t=st=1738056391~exp=1738059991~hmac=631144927b213996011b0bc5182f6a51d3be393e30debd676b574fbe1fb938c8&w=740';
+        this.dayNightGif = isDay ? '../../../assets/day-bg.webp' : '../../../assets/night-bg.webp';
       },
       error: () => {
         this.message = 'City not found! Please try again.';
