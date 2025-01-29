@@ -91,6 +91,10 @@ export class WeatherCardComponent implements OnInit {
         day: '../../../assets/mist-day.gif',
         night: '../../../assets/mist-night.gif',
       },
+      Fog: {
+        day: '../../../assets/mist-day.gif',
+        night: '../../../assets/mist-night.gif',
+      },
       Haze: {
         day: '../../../assets/haze-day.gif',
         night: '../../../assets/haze-night.gif',
